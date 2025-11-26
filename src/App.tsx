@@ -8,7 +8,7 @@ import {
 import "./css/heist-theme.css";
 
 import { Web3ModalProvider } from "./providers/web3Provider";
-import { Toaster } from "react-hot-toast";
+// import { Toaster } from "react-hot-toast";
 const AppTitle = import.meta.env.VITE_APP_TITLE;
 const fontFamily = import.meta.env.VITE_APP_FONT_FAMILY || "Arial, sans-serif";
 const favicon = import.meta.env.VITE_APP_FAVICON || "/favicon.ico";
@@ -54,7 +54,7 @@ const App: React.FC = () => {
   return (
     <Web3ModalProvider>
       <div className="heist-container">
-        <Toaster />
+        {/* <Toaster /> */}
         <Header />
         <TodoPage />
       </div>
