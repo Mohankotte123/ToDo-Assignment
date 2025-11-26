@@ -1,99 +1,5 @@
-// import React, { useEffect } from "react";
-// import { useAccount, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
-// import { useTodos } from "../../hooks/usetodos.ts";
-// import AddTodo from "./AddTodo.tsx";
-// import TodoList from "./TodoList.tsx";
-// import { contractConfig } from "../../wagmi/contractConfig.ts";
-
-// const TodoPage: React.FC = () => {
-//   const { isConnected } = useAccount();
-//   const { todos, isLoading, refetch } = useTodos();
-//   const [togglePending, setTogglePending] = React.useState<{ [key: number]: boolean }>({});
-
-//   // toggle functionality
-//   const { data: toggleHash, writeContract: toggleTodo, isPending } = useWriteContract();
-//   const toggleReceipt = useWaitForTransactionReceipt({ hash: toggleHash });
-
-//   useEffect(() => {
-//     if (toggleReceipt.isSuccess) refetch();
-//   }, [toggleReceipt.isSuccess, refetch]);
-
-// const handleToggle = async (index: number) => {
-//   try {
-//     setTogglePending((prev) => ({ ...prev, [index]: true }));
-
-//     await toggleTodo({
-//       ...contractConfig,
-//       functionName: "toggleTodo",
-//       args: [index],
-//     });
-
-//     // wait for the transaction to be mined
-//     // optional if you use wagmi receipt hook
-//     // await toggleReceipt.wait(); // or publicClient.waitForTransactionReceipt({ hash: toggleHash })
-
-//     refetch(); // refresh todos
-//   } catch (err) {
-//     console.error(err);
-//   } finally {
-//     setTogglePending((prev) => ({ ...prev, [index]: false }));
-//   }
-// };
-
-
-// if (!isConnected)
-//   return (
-//     <div style={{ textAlign: "center", marginTop: "120px" }}>
-//       <h2>Please connect wallet to view your Todos.</h2>
-//     </div>
-//   );
-
-//   return (
-//     <div
-//       style={{
-//         // Container Styling
-//         maxWidth: 650,
-//         width: '95%', // Ensures responsiveness
-//         margin: "30px auto",
-//         padding: 25,
-
-//         // Aesthetic Styling
-
-//         borderRadius: 12,
-//         border: '1px solid #007bff', // Use a prominent blue border
-//         boxShadow: '0 8px 25px rgba(0, 123, 255, 0.3)', // Stronger blue shadow for 'pop'
-//       }}
-//     >
-//       {/* Header Styling */}
-//       <h2
-//         style={{
-//           textAlign: 'center',
-//           color: '#007bff', // Primary blue color for the title
-//           marginBottom: '25px',
-//           borderBottom: '2px solid #007bff', // Use the primary blue for the underline
-//           paddingBottom: '10px',
-//           fontSize: '28px',
-//         }}
-//       >
-//         Your Todos ✨
-//       </h2>
-
-//       <AddTodo onAdded={() => refetch()} />
-
-//       {/* Loading State */}
-//       {isLoading ? (
-//         <p style={{ textAlign: 'center', color: '#666', marginTop: '20px' }}>Loading...</p>
-//       ) : (
-//         <TodoList todos={todos} onToggle={handleToggle} togglePending={togglePending} />
-//       )}
-//     </div>
-//   );
-// };
-
-// export default TodoPage;
-
 import React, { useEffect } from "react";
-import { useAccount, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
+import { useAccount, useWriteContract } from "wagmi";
 import { useTodos } from "../../hooks/usetodos.ts";
 import AddTodo from "./AddTodo.tsx";
 import TodoList from "./TodoList.tsx";
@@ -106,8 +12,8 @@ const TodoPage: React.FC = () => {
   const [togglePending, setTogglePending] = React.useState<{ [key: number]: boolean }>({});
 
   // toggle functionality
-  const { data: toggleHash, writeContract: toggleTodo, isPending } = useWriteContract();
-  const toggleReceipt = useWaitForTransactionReceipt({ hash: toggleHash });
+  const {writeContract: toggleTodo} = useWriteContract();
+
 
   const [isContentVisible, setIsContentVisible] = React.useState(false);
 
@@ -120,9 +26,6 @@ const TodoPage: React.FC = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // ... (handleToggle and other functions)
-
-  // ... (if (!isConnected) return block)
 
 
   const handleToggle = async (index: number) => {

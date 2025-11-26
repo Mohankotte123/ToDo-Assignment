@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import WalletConnect from "../walletConnect";
+import WalletBalance from "../walletConnect/Walletbalance";
 
 
 
@@ -59,6 +60,7 @@ const Navbars = () => {
           >
             TODO Dapp
           </div>
+          <WalletBalance/>
 
           {/* 3. Right Section: Wallet Connect Button */}
           <div className="d-flex align-items-center gap-3">

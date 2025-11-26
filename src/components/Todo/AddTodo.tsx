@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useWriteContract, useWaitForTransactionReceipt } from "wagmi";
 import { contractConfig } from "../../wagmi/contractConfig.ts";
-import { showSuccessAlert } from "../../utils/SweetAlertUtils";
 
 const AddTodo: React.FC<{ onAdded: () => void }> = ({ onAdded }) => {
   const [text, setText] = useState("");
