@@ -60,7 +60,7 @@ const Navbars = () => {
           >
             TODO Dapp
           </div>
-          <WalletBalance/>
+          {/* <WalletBalance/> */}
 
           {/* 3. Right Section: Wallet Connect Button */}
           <div className="d-flex align-items-center gap-3">
